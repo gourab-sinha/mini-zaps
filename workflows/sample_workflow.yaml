@@ -1,0 +1,23 @@
+name: sample_workflow
+global_retry_policy:
+  max_retries: 3
+  exponential_backoff: true
+steps:
+  - type: delay
+    config:
+      seconds: 2
+    retry_on_failure: false  # Don't retry delays
+  
+  - type: webhook
+    config:
+      url: "https://httpbin.org/post"
+      method: "POST"
+      headers:
+        Content-Type: "application/json"
+        X-Custom-Header: "mini-zaps"
+      body:
+        message: "Hello from workflow!"
+        trigger_data: "{{trigger}}"
+        timestamp: "{{step_1}}"
+    retry_on_failure: true
+    timeout_seconds: 30

@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  mini-zaps:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./data/workflows.db
+    volumes:
+      - ./workflows:/app/workflows
+      - ./data:/app/data
+    restart: unless-stopped

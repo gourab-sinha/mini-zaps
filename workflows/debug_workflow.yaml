@@ -1,0 +1,6 @@
+
+name: debug_workflow
+steps:
+  - type: delay
+    config:
+      seconds: 1

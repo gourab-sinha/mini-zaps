@@ -1,0 +1,31 @@
+name: notification_workflow
+steps:
+  - type: webhook
+    config:
+      url: "https://httpbin.org/post"
+      method: "POST"
+      headers:
+        Content-Type: "application/json"
+      body:
+        alert: "User action detected"
+        user_id: "{{trigger.user_id}}"
+        action: "{{trigger.action}}"
+    retry_on_failure: true
+    timeout_seconds: 15
+  
+  - type: delay
+    config:
+      seconds: 5
+    retry_on_failure: false
+  
+  - type: webhook
+    config:
+      url: "https://httpbin.org/post"
+      method: "POST"
+      headers:
+        Content-Type: "application/json"
+      body:
+        followup: "Delayed notification sent"
+        original_alert_response: "{{step_1}}"
+    retry_on_failure: true
+    timeout_seconds: 15

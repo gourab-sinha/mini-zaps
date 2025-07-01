@@ -1,0 +1,28 @@
+[project]
+name = "mini-zaps"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Gourab Sinha",email = "gourab19964u@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi (>=0.115.14,<0.116.0)",
+    "uvicorn (>=0.35.0,<0.36.0)",
+    "pydantic (>=2.11.7,<3.0.0)",
+    "sqlalchemy (>=2.0.41,<3.0.0)",
+    "aiosqlite (>=0.21.0,<0.22.0)",
+    "pyyaml (>=6.0.2,<7.0.0)",
+    "httpx (>=0.28.1,<0.29.0)",
+    "python-multipart (>=0.0.20,<0.0.21)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+greenlet = "^3.2.3"
+

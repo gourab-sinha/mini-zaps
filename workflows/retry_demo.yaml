@@ -1,0 +1,22 @@
+name: retry_demo
+steps:
+  # This step will likely fail and demonstrate retry mechanism
+  - type: webhook
+    config:
+      url: "https://httpbin.org/status/500"  # Always returns 500 error
+      method: "GET"
+    retry_on_failure: true
+    timeout_seconds: 10
+  
+  - type: delay
+    config:
+      seconds: 1
+  
+  # This step should succeed
+  - type: webhook
+    config:
+      url: "https://httpbin.org/post"
+      method: "POST"
+      body:
+        message: "This step should succeed after the previous retry demo"
+        test: true
